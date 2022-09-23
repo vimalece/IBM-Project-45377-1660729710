@@ -1,0 +1,48 @@
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(5,INPUT);
+  pinMode(3,OUTPUT);
+}
+void loop()
+{
+  int motion=digitalRead(5);
+  Serial.println(" Position is:");
+  Serial.println(motion);
+  if(motion==1){
+    Serial.println("Motion detected");
+    
+    tone(3,motion);
+    delay(1000);
+  }
+  else{
+    Serial.println("No Motion");
+    noTone(500);
+    delay(1000);
+  }
+}
+void tmp36(){
+  double data=analogRead(A3);
+  double n=data/1024;
+  double volt=n*5;
+  
+  double off=volt-0.5;
+  double LM=off*100;
+  Serial.print("LM:");
+  
+  if(LM>=60)
+  {
+    digitalWrite(3,HIGH);
+    Serial.println("temp=");
+    delay(1000);
+    
+  }
+  else
+  {
+    digitalWrite(3,LOW);
+    Serial.println("temp=");
+    delay(500);
+  }
+}
+    
